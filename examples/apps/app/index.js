@@ -20,7 +20,6 @@ var startConf={
 }
 var accountScope = null;
 
-
 // Define an alexa-app
 var app = new alexa.app('app');
 app.id = require('./package.json').alexa.applicationId;
@@ -43,7 +42,6 @@ app.intent('balanceIntent', {
   }
 });
 
-
 app.intent('chequeaccountIntent', {
   "slots": { },
   "utterances": []
@@ -52,7 +50,6 @@ app.intent('chequeaccountIntent', {
   res.say("Your balance is "+ startConf.chequeAccount.balance+" rand.");
 });
 
-
 app.intent('CreditCardIntent', {
   "slots": { },
   "utterances": []
@@ -60,22 +57,6 @@ app.intent('CreditCardIntent', {
   var accountType = req.slot("account");
   res.say("You owe ABSA "+ Math.abs(startConf.creditAccount.balance)+" rand.");
 });
-
-
-
-app.intent('DefaultIntent', {
-  "slots": { },
-  "utterances": [        "Default",
-       "Dfault",
-       "Dfaults",
-       "Defaults",
-       "Dfaultss",
-       "Dfaultsss"]
-}, function(req, res) {
- res.say('Please repeat what you said. I did not quiet understand');
-});
-
-app.messages.NO_INTENT_FOUND = "Why you called dat intent? I don't know bout dat";
 
 app.intent("AMAZON.StopIntent", {
   "slots": {    
