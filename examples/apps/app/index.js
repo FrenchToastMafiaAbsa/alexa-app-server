@@ -75,12 +75,7 @@ app.intent('DefaultIntent', {
  res.say('Please repeat what you said. I did not quiet understand');
 });
 
-app.intent(null, {
-  "slots": { },
-  "utterances": []
-}, function(request,response) {
-    res.say('The world is happy again');
-});
+app.messages.NO_INTENT_FOUND = "Why you called dat intent? I don't know bout dat";
 
 app.intent("AMAZON.StopIntent", {
   "slots": {    
