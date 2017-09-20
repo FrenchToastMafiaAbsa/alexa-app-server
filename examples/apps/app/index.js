@@ -8,21 +8,14 @@ var app = new alexa.app('app');
 app.id = require('./package.json').alexa.applicationId;
 
 app.launch(function(req, res) {
-  res.say("Hello World!!");
+  res.say("Hello Hackathon");
 });
 
-app.intent('NameIntent', {
-  "slots": { "NAME": "LITERAL", "AGE": "NUMBER" },
-  "utterances": ["{My name is|my name's} {matt|bob|bill|jake|nancy|mary|jane|NAME} and I am {1-100|AGE}{ years old|}"]
+app.intent('balanceIntent', {
+  "slots": {},
+  "utterances": []
 }, function(req, res) {
-  res.say('Your name is ' + req.slot('NAME') + ' and you are ' + req.slot('AGE') + ' years old');
-});
-
-app.intent('AgeIntent', {
-  "slots": { "AGE": "NUMBER" },
-  "utterances": ["My age is {1-100|AGE}"]
-}, function(req, res) {
-  res.say('Your age is ' + req.slot('AGE'));
+  res.say('Fuck you divar');
 });
 
 module.exports = app;
