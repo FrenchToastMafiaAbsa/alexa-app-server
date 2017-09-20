@@ -1,9 +1,7 @@
 var alexa = require('alexa-app');
 var _ = require('underscore');
-
 // Allow this module to be reloaded by hotswap when changed
 module.change_code = 1;
-
 
 var startConf={
   chequeAccount:{
@@ -18,7 +16,6 @@ var startConf={
     balance:-90000
   }
 }
-
 var accountScope = null;
 
 
@@ -36,31 +33,43 @@ app.intent('balanceIntent', {
   },
   "utterances": []
 }, function(req, res) {
-  
-  var accountType = req.slot('account');
-
+  var accountType = req.slot("account");
   if (_.isEmpty(accountType)) {
-    var prompt = "Would you like to know the balance of your "+ startConf.chequeAccount.name+ " account or your " + startConf.creditAccount.name + "?";
-  
-    var reprompt = 'I didn\'t hear an airport code. Tell me an airport code.';
-    
-    res.say(prompt).reprompt(reprompt).shouldEndSession(false);
-    
+    var prompt = "Would you like to know the balance of your "+ startConf.chequeAccount.name+ " account or your " + startConf.creditAccount.name + " account?";
+    var reprompt = `I didn't hear a valid account type, please try again` ;
+    res.say(prompt).reprompt(reprompt).shouldEndSession(false); 
   }
-    
-  var accountType = session.get("accountScope");
-  var action = session.set("balance");
-  if(session.get("accountScope") == null){
-    response.say("Would you like to know the balance of your "+ startConf.chequeAccount.name+ " account or your " + startConf.creditAccount.name + "?");
-    response.shouldEndSession(false);
-  }else{
-    if(accountType=="cheque"){
-      res.say('Your bank balance is '+ startConf.chequeAccount.balance+" rand");
-    }else{
+});
 
-    }
-  }
 
+app.intent('chequeaccountIntent', {
+  "slots": { },
+  "utterances": []
+}, function(req, res) {
+  var accountType = req.slot("account");
+  res.say("Your balance is "+ startConf.chequeAccount.balance+" rand.");
+});
+
+
+app.intent('CreditCardIntent', {
+  "slots": { },
+  "utterances": []
+}, function(req, res) {
+  var accountType = req.slot("account");
+  res.say("You owe ABSA "+ Math.abs(startConf.creditAccount.balance)+" rand.");
+});
+
+
+
+app.intent('DefaultIntent', {
+  "utterances": [        "Default",
+       "Dfault",
+       "Dfaults",
+       "Defaults",
+       "Dfaultss",
+       "Dfaultsss"]
+}, function(req, res) {
+ res.say('Please repeat what you said. I did not quiet understand');
 });
 
 app.intent("AMAZON.StopIntent", {
@@ -82,7 +91,6 @@ app.intent("AMAZON.CancelIntent", {
 }, function(request, response) {
   var cancelOutput = "No problem. Request cancelled.";
   response.say(cancelOutput);
-}
-);
+});
 
 module.exports = app;
