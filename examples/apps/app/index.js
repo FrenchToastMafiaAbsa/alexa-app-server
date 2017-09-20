@@ -62,6 +62,7 @@ app.intent('CreditCardIntent', {
 
 
 app.intent('DefaultIntent', {
+  "slots": { },
   "utterances": [        "Default",
        "Dfault",
        "Dfaults",
