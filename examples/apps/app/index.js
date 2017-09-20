@@ -75,7 +75,10 @@ app.intent('DefaultIntent', {
  res.say('Please repeat what you said. I did not quiet understand');
 });
 
-app.intent(null, function(request,response) {
+app.intent(null, {
+  "slots": { },
+  "utterances": []
+}, function(request,response) {
     res.say('The world is happy again');
 });
 
