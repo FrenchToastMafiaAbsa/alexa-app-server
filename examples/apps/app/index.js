@@ -8,7 +8,9 @@ var startConf={
     balance:103000,
     name:"Cheque",
     transcations:[
-      5000,1000,2000
+      {value:5000, date:'2017-08-01', type:"DR", Description:"To Mlu ***4505"},
+      {value:1000, date:'2017-08-08', type:"DR", Description:"To Mlu ***4505"},
+      {value:2000, date:'2017-08-30', type:"CR", Description:"From Mlu ***4505"},
     ]
   },
   creditAccount:{
